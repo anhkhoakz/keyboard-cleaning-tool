@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var keyboardService = KeyboardBlockingService()
     @State private var showingPermissionAlert = false
+    @AppStorage("autoStartCleaning") private var autoStartCleaning = false
 
     var body: some View {
         VStack(spacing: 20) {
@@ -18,12 +19,19 @@ struct ContentView: View {
                     .font(.system(size: 40))
                     .foregroundColor(keyboardService.isBlocking ? .red : .blue)
                     .animation(.easeInOut(duration: 0.1), value: keyboardService.isBlocking)
-                    .frame( height: 40)
+                    .frame(height: 40)
 
                 Text("Keyboard Clean Tool")
                     .font(.title2)
                     .fontWeight(.bold)
             }
+
+            HStack {
+                Toggle("Auto Lock", isOn: $autoStartCleaning)
+                    .font(.caption)
+            }
+            .padding(.horizontal)
+            .focusable(false)
 
             // Control Button
             Button(action: toggleLock) {
@@ -46,6 +54,14 @@ struct ContentView: View {
         .padding(20)
         .frame(maxWidth: 560, maxHeight: 200)
         .background(Color(NSColor.controlBackgroundColor))
+        .onAppear {
+            if autoStartCleaning {
+                // Small delay to ensure the UI is fully loaded
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    keyboardService.startBlocking()
+                }
+            }
+        }
     }
 
     private func toggleLock() {
@@ -59,4 +75,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .frame(width: 300, height: 200)
 }
