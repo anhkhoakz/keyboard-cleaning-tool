@@ -14,7 +14,7 @@ struct keyboard_cleaning_toolApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .frame(width: 300, height: 200)
+                .frame(width: 384, height: 216)
         }
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)

@@ -4,6 +4,13 @@ A macOS utility app that temporarily blocks keyboard input to facilitate
 keyboard cleaning without accidentally triggering system shortcuts or typing
 unwanted characters.
 
+## Why don't use KeyboardCleanTool?
+
+[KeyboardCleanTool](https://folivora.ai/keyboardcleantool) is a great tool for
+cleaning your keyboard, and this project based on it.
+
+But I love the open source, so I decided to create my own version of it.
+
 ## Features
 
 - **Keyboard Input Blocking**: Temporarily blocks all keyboard input using macOS
